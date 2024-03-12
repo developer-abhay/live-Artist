@@ -1,12 +1,15 @@
 import React from "react";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
-import Artist from "./pages/Artist/Artist";
-import Contact from "./pages/Contact/Contact";
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
+import Artist from "./pages/Artist";
+import Contact from "./pages/Contact";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
+import { artistList } from "./data/data";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ArtistProfile from "./pages/ArtistProfile";
 const App = () => {
   return (
     <>
@@ -17,8 +20,13 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/artist" element={<Artist />} />
           <Route path="/contact" element={<Contact />} />
-          <Route />
-          <Route />
+          {artistList.map((item, index) => (
+            <Route
+              key={index}
+              path={`/${item.name}`}
+              element={<ArtistProfile props={item} />}
+            />
+          ))}
         </Routes>
         <Footer />
       </Router>
